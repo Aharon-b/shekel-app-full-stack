@@ -1,6 +1,6 @@
 # shekel-app-full-stack-
 Shekel - an organization for people with special needs. Organizational hierarchy:
- - administrator (can be more than one)
+ Administrator (can be more than one)
  Coordinators
  Width guides
  Guides
@@ -13,6 +13,8 @@ Coordinator: Responsible for a number of apartments (usually 5).
  (Each user can have several roles)
 
 The app is primarily designed to provide information to instructors about their apartments (a guide can be in more than one apartment).
+
+Guide:
 - list of guide's apartments.
 - List of tenants in each apartment.
 - Information on each tenant (general details + chores list + medicine list)
