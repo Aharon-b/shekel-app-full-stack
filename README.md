@@ -1,4 +1,4 @@
-# shekel-app-full-stack-
+# shekel-app-full-stack
 Shekel - an organization for people with special needs. Organizational hierarchy:
  Administrator (can be more than one)
  Coordinators
