@@ -1,0 +1,14 @@
+/* For highlighting tenants who have a birthday in 30 days or less */
+.yellow {
+    background-color: yellow;
+}
+
+/* For highlighting tenants who have a birthday in a week or less */
+.red {
+    background-color: red;
+}
+
+/* For highlighting tenants that today it's their birthday */
+.purple {
+    background-color: purple;
+}

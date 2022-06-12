@@ -1,0 +1,23 @@
+<!-- In case password is still default -->
+<app-change-password-display *ngIf="!passwordUpdatedBoolean"
+                             [defaultPassword]=true></app-change-password-display>
+
+<div *ngIf="passwordUpdatedBoolean">
+
+        <div *ngIf="detailsDisplay"
+             [ngClass]="{'disable': toAddRequest}">
+                <!-- For user's details -->
+                <app-user-start-display [shekelMember]="widthGuide.shekelMember"
+                                        [userTenants]="widthGuideTenants"
+                                        [isGuideUser]="false"></app-user-start-display>
+
+        </div>
+        <!-- For adding replacements requests/offers -->
+        <app-add-replacement-request-or-offer *ngIf="toAddRequest"
+                                              [kindOfReplacement]="kindOfReplacement">
+        </app-add-replacement-request-or-offer>
+
+        <div [ngClass]="{'disable': toAddRequest}">
+                <router-outlet></router-outlet>
+        </div>
+</div>

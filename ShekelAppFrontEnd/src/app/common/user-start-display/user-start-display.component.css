@@ -1,0 +1,12 @@
+/* For all buttons in user start page */
+button {
+    position : absolute;
+    left     : 1000px;
+    min-width: 200px;
+}
+
+/* If user is Guide type */
+.guide-user {
+    left: 50px;
+    top : 10px;
+}

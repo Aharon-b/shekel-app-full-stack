@@ -1,0 +1,68 @@
+<!-- All tenants with no apartment table -->
+<div class="position table-position"
+     [ngClass]="{'scroll': tenantsNoApartmentArray.length > 8}">
+    <table>
+
+        <thead>
+            <tr>
+                <!-- Name -->
+                <th>שם</th>
+                <!-- Phone number -->
+                <th>טלפון</th>
+
+            </tr>
+        </thead>
+        <!-- Tenant details -->
+        <tbody>
+            <tr *ngFor="let tenant of tenantsNoApartmentArray"
+                class="admin-tables"
+                style="cursor: pointer;">
+                <td (click)="chooseTenant(tenant)">{{tenant.shekelMember.firstName}} {{tenant.shekelMember.lastName}}
+                </td>
+
+                <td>{{tenant.shekelMember.phoneNumber}}</td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- A div with all the apartments in the system selection & tenants name field 
+(for choosing witch tenant to add to witch apartment) -->
+<div class="position"
+     style="top: 185px; left: 600px;">
+    <label style="max-width: fit-content; color: #000;">דירה</label>
+    <select class="position"
+            style="max-width: fit-content;"
+            id="selectedApartment"
+            name="selectedApartment"
+            class="form-control"
+            [(ngModel)]="selectedApartment">
+        <option *ngFor="let apartment of apartmentsInSystem"
+                [ngValue]="apartment">{{apartment.name}}</option>
+    </select>
+
+    <div (mouseenter)="showDefaultTenantName()"
+         (mouseleave)="hideDefaultTenantName()">
+        <!-- Tenants names field -->
+        <label for="choosenTenant"
+               style=" color: #000;">דייר/ת</label>
+        <input style="  background-color: aliceblue;"
+               type="text"
+               size="25"
+               id="choosenTenant"
+               ngModel
+               name="chosenTenant"
+               class="form-control"
+               [(ngModel)]="tenantName"
+               [disabled]="true">
+    </div>
+    <!-- 'Add tenant to apartment' button -->
+    <button type="button"
+            class="btn btn-success"
+            (click)="addTenantToApartment()"
+            [disabled]="!showSubmitBtn">הוספת דייר/ת לדירה</button>
+</div>
+<!-- For showing error/success messages -->
+<app-screen-msg-display *ngIf="msg !== ''"
+                        [msgDisplay]="msg"></app-screen-msg-display>

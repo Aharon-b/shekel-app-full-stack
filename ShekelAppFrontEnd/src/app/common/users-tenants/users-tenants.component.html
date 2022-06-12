@@ -1,0 +1,17 @@
+<!-- Tenants & birth days table-->
+<div class="tenants-table-position"
+     [ngClass]="{'tenants-table-overflow , rtl':userTenants.length > 3 }">
+    <table [ngClass]="{' ltr':userTenants.length > 3 }">
+        <th style="text-align: center;">דיירים וימי הולדת</th>
+
+        <tbody *ngFor="let tenant of userTenants ; let i = index">
+
+            <tr style="cursor: pointer;"
+                [ngClass]="{'yellow': checkMonth(tenant),'red': checkWeek(tenant),'purple':checkDay(tenant)}">
+                <td style="vertical-align: text-top;">{{i + 1}}- {{getTenantDetails(tenant).firstName}}
+                    <br> {{getTenantDetails(tenant).lastName}}</td>
+                <td style="vertical-align: text-top;">{{reverseDate(tenant.birthDay.toLocaleString())}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

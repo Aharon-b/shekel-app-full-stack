@@ -1,0 +1,59 @@
+<!-- All guides with no apartments table -->
+<div class="position table-position"
+     [ngClass]="{'scroll': guidesWithNoApartmentsArray.length > 8}">
+    <table style="cursor: pointer;">
+        <thead>
+            <tr>
+                <!-- Name -->
+                <th>שם</th>
+                <!-- Phone number -->
+                <th>טלפון</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Guide details -->
+            <tr *ngFor="let guide of guidesWithNoApartmentsArray"
+                class="admin-tables">
+                <td (click)="chooseGuide(guide)">{{guide.shekelMember.firstName}} {{guide.shekelMember.lastName}}</td>
+                <td>{{guide.shekelMember.phoneNumber}}</td>
+
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+<!-- A div with all the apartments in the system selection & guides name field 
+    (for choosing witch apartment to add to witch guide) -->
+<div class="position"
+     style="top: 185px; left: 750px;">
+    <label style="max-width: fit-content; color: #000;">דירה</label>
+    <select class="position"
+            style="max-width: fit-content;"
+            id="selectedApartment"
+            name="selectedApartment"
+            class="form-control"
+            [(ngModel)]="selectedApartment">
+        <option *ngFor="let apartment of apartmentsInSystem"
+                [ngValue]="apartment">{{apartment.name}}</option>
+    </select>
+    <!-- Guides names field -->
+    <label for="choosenGuide"
+           style=" color: #000;">מדריכ.ה</label>
+    <input style="width: 320px;  background-color: aliceblue;"
+           type="text"
+           id="choosenGuide"
+           ngModel
+           name="chosenGuide"
+           class="form-control"
+           [(ngModel)]="guideName"
+           [disabled]="true">
+    <!-- 'Add apartment to guide' button -->
+    <button type="button"
+            class="btn btn-success"
+            (click)="addApartmentToGuide()"
+            [disabled]="!showSendButton">הוספת מדריכ\ה לדירה</button>
+</div>
+<!-- For showing error/success messages -->
+<app-screen-msg-display *ngIf="msg !== ''"
+                        [msgDisplay]="msg"></app-screen-msg-display>

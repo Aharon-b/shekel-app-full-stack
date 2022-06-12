@@ -1,0 +1,35 @@
+<!-- In case password is still default -->
+<app-change-password-display *ngIf="!passwordUpdatedBoolean"
+                             [defaultPassword]=true></app-change-password-display>
+
+<div *ngIf="passwordUpdatedBoolean">
+        <div *ngIf="detailsDisplay === true"
+             [ngClass]="{'disable ': toAddRequest}">
+                <!-- For user's details -->
+                <app-user-start-display [shekelMember]="coordinator.shekelMember"
+                                        [userTenants]="coordinatorTenants"
+                                        [isGuideUser]="false"></app-user-start-display>
+
+                <div class="position approval-table">
+                        <!-- For approving replacements requests -->
+                        <ng-container *ngIf="coordinatorApprovalArray.length > 0; else noRequestsToApproveTemplate">
+                                <app-coordinator-replacements-approval-table [coordinatorApprovalArray]="coordinatorApprovalArray"
+                                                                             *ngIf="coordinatorApprovalArray.length > 0">
+
+                                </app-coordinator-replacements-approval-table>
+                        </ng-container>
+                        <ng-template #noRequestsToApproveTemplate>
+                                <!-- 'No replacements requests' -->
+                                <h1>אין בקשות החלפה</h1>
+                        </ng-template>
+                </div>
+        </div>
+
+        <!-- For adding replacements requests/offers -->
+        <app-add-replacement-request-or-offer *ngIf="toAddRequest"
+                                              [kindOfReplacement]="true"></app-add-replacement-request-or-offer>
+
+        <div [ngClass]="{'disable': toAddRequest}">
+                <router-outlet></router-outlet>
+        </div>
+</div>

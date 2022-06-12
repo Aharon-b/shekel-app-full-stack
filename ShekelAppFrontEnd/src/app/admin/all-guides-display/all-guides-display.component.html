@@ -1,0 +1,46 @@
+<!-- All guides in system table -->
+<div class="position table-position"
+     [ngClass]="{'scroll': guidesArray.length > 6}">
+
+    <table>
+        <thead>
+            <tr>
+                <!-- Name -->
+                <th>שם</th>
+                <!-- Phone number -->
+                <th>טלפון</th>
+                <!-- Apartments -->
+                <th>דירות</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let guide of guidesArray"
+                class="admin-tables">
+                <td>{{guide.shekelMember.firstName}} {{guide.shekelMember.lastName}}</td>
+
+                <td>{{guide.shekelMember.phoneNumber}}</td>
+                <!-- For displaying each guide apartments -->
+                <td *ngIf="guide.apartments.length > 0">
+                    <div *ngFor="let apartment of guide.apartments">
+                        {{apartment.name}}
+                    </div>
+                </td>
+                <!-- In case guide has no apartments -->
+                <td *ngIf="guide.apartments.length  < 1"
+                    style="color: red;">-------</td>
+                <td>
+                    <!-- 'Delete guide from system' button -->
+                    <button type="button"
+                            class="btn btn-danger"
+                            (click)="deleteGuideFromSystem(guide)">מחיקה</button>
+                </td>
+
+            </tr>
+        </tbody>
+
+    </table>
+</div>
+<!-- For showing error/success messages -->
+<app-screen-msg-display *ngIf="msg !== ''"
+                        [msgDisplay]="msg"></app-screen-msg-display>

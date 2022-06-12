@@ -1,0 +1,40 @@
+<!-- Displaying all of the apartments in the system -->
+<div class="position table-position"
+     [ngClass]="{'scroll': apartments.length > 7}">
+    <table>
+        <thead>
+            <tr>
+                <!-- apartment's name -->
+                <th>שם הדירה</th>
+                <!-- apartment's address -->
+                <th>כתובת</th>
+                <!-- apartment's telephone number -->
+                <th>טלפון</th>
+                <!-- apartment's coordinator name -->
+                <th>רכזת</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let apartment of apartments">
+                <td>{{apartment.name}}</td>
+                <td>{{apartment.address}}</td>
+                <td>{{apartment.phoneNumber}}</td>
+                <td *ngIf="apartment.coordinator != undefined ">{{apartment.coordinator.shekelMember.firstName}}
+                </td>
+                <td *ngIf="apartment.coordinator == undefined "
+                    class="no-coordinator">
+                    ____________
+                </td>
+                <!-- A button for deleting apartment from the system -->
+                <td><button type="button"
+                            class="btn btn-danger"
+                            (click)="deleteApartmentFromSystem(apartment)">מחיקה</button></td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- For showing success deleting apartment from system message-->
+<app-screen-msg-display *ngIf="msg !== ''"
+                        [msgDisplay]="msg"></app-screen-msg-display>

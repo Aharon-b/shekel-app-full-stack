@@ -1,0 +1,113 @@
+<div class="form-display"
+     style="z-index: 1;">
+        <!-- Form for adding replacement request/offer -->
+        <form (ngSubmit)="onSubmit()">
+                <h1 style="text-align: center;">{{title}}</h1>
+                <br *ngIf="!kindOfReplacement">
+                <br *ngIf="!kindOfReplacement">
+                <!-- 'Start' -->
+                <label for="startDay">התחלה</label>
+                <br>
+                <div class="form-group">
+                        <!-- start day -->
+                        <input id="startDay"
+                               ngModel
+                               name="startDay"
+                               class="form-control"
+                               [(ngModel)]="replacementRequest.start.day"
+                               placeholder="Start date"
+                               (focusout)="checkIfDateIsOver(0)"
+                               min="{{this.today.toISOString().split('T')[0]}}"
+                               max="2100-12-12"
+                               type="date">
+
+                </div>
+                <br>
+                <div class="form-group">
+                        <!-- start time -->
+                        <input type="time"
+                               id="startTime"
+                               ngModel
+                               name="startTime"
+                               class="form-control"
+                               [(ngModel)]="startTime">
+                </div>
+                <br *ngIf="!kindOfReplacement">
+
+                <!-- 'End' -->
+                <label for="endDay">סיום</label>
+                <br>
+                <div class="form-group">
+                        <!-- end day -->
+                        <input id="endDay"
+                               ngModel
+                               name="endDay"
+                               class="form-control"
+                               [(ngModel)]="replacementRequest.end.day"
+                               placeholder="End date"
+                               maxlength="4"
+                               max="2100-12-12"
+                               min="{{this.today.toISOString().split('T')[0]}}"
+                               (focusout)="checkIfDateIsOver(1)"
+                               type="date">
+
+                </div>
+                <br>
+                <div class="form-group">
+                        <!-- end time -->
+                        <input type="time"
+                               id="endTime"
+                               ngModel
+                               name="endTime"
+                               class="form-control"
+                               [(ngModel)]="endTime">
+                </div>
+
+                <!-- In case that it's a request replacement (only on Guide type) -->
+                <div *ngIf="kindOfReplacement">
+                        <!-- For choosing a apartment from guide apartments array -->
+                        <!-- 'choosing apartment for replacement request' -->
+                        <label for="">בחירת דירה לבקשת החלפה</label>
+                        <select class="position"
+                                style="max-width: fit-content;"
+                                for="selectedApartment"
+                                id="selectedApartment"
+                                name="selectedApartment"
+                                class="form-control"
+                                [(ngModel)]="selectedApartment">
+                                <option *ngFor="let apartment of userApartments"
+                                        [ngValue]="apartment">{{apartment.name}}</option>
+                        </select>
+                </div>
+
+                <div>
+                        <!-- Comments -->
+                        <textarea rows="3"
+                                  cols="38"
+                                  name="comment"
+                                  form="usrform"
+                                  class="position"
+                                  style="top:75% ;resize: none;"
+                                  *ngIf="kindOfReplacement"
+                                  [(ngModel)]="replacementRequest.comments">
+                        הערות...</textarea>
+                </div>
+
+                <!-- Submit button -->
+                <button type="submit"
+                        style="top: 93%; width: 150px;"
+                        class="btn btn-success position"
+                        [disabled]="!startTime || !this.replacementRequest.start.day || replacementRequest.start.day.toLocaleString() == ''
+                                    || !endTime || !this.replacementRequest.end.day || this.replacementRequest.end.day.toLocaleString() == ''">אישור</button>
+
+                <!-- Cancel button -->
+                <button type="button"
+                        class="btn btn-danger position cancel-btn"
+                        (click)=onCancel()>ביטול</button>
+
+        </form>
+</div>
+
+<!-- For displaying success/error messages -->
+<app-screen-msg-display *ngIf="msgDisplay !== ''"
+                        [msgDisplay]='msgDisplay'></app-screen-msg-display>

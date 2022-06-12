@@ -1,0 +1,57 @@
+/* All classes are for displaying purposes */
+
+.all-options {
+    border-style   : outset;
+    text-align     : center;
+    width          : 250px;
+    height         : 250px;
+    cursor         : pointer;
+    text-decoration: none;
+    line-height    : 200px;
+}
+
+.header-position {
+    left: 500px;
+}
+
+.admin-and-guide-position {
+    top: 50px;
+}
+
+.admin-and-widthGuide-position {
+    left: 380px;
+}
+
+.coordinator-and-widthGuide-position {
+    top: 300px;
+}
+
+.coordinator-and-guide-position {
+    left: 630px;
+}
+
+.all-hover {
+    transition-duration: .3s;
+}
+
+.all-hover:hover {
+    color    : aliceblue;
+    font-size: 30px;
+}
+
+.admin {
+    background-color: cadetblue;
+}
+
+.coordinator {
+    background-color: blueviolet;
+
+}
+
+.width-guide {
+    background-color: tomato;
+}
+
+.guide {
+    background-color: teal;
+}

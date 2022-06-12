@@ -1,0 +1,120 @@
+<!-- All width-guides in system table -->
+<div class="position table-position all-width-guides"
+     [ngClass]="{'scroll': widthGuidesArray.length > 6}">
+        <table>
+                <thead>
+                        <tr>
+                                <!-- Name -->
+                                <th>שם</th>
+                                <!-- Phone number -->
+                                <th>טלפון</th>
+                                <!-- Coordinator -->
+                                <th>רכזת</th>
+                        </tr>
+                </thead>
+
+                <tbody>
+                        <tr *ngFor="let widthGuide of widthGuidesArray;let i = index"
+                            class="admin-tables">
+                                <td>{{i + 1}}- {{widthGuide.shekelMember.firstName}}
+                                        {{widthGuide.shekelMember.lastName}}</td>
+                                <td>{{widthGuide.shekelMember.phoneNumber}}</td>
+                                <td *ngIf="widthGuide.coordinator !== null ">
+                                        {{widthGuide.coordinator.shekelMember.firstName}}
+                                        {{widthGuide.coordinator.shekelMember.lastName}}</td>
+                                <!-- In case a width-guide isn't registered in any coordinator -->
+                                <td *ngIf="widthGuide.coordinator === null ">-----------------------------</td>
+                                <!-- 'Delete width-guide from system' button -->
+                                <td><button type="button"
+                                                class="btn btn-danger"
+                                                (click)="deleteWidthGuideFromSystem(widthGuide)">מחיקה</button></td>
+
+                        </tr>
+                </tbody>
+        </table>
+</div>
+
+<!-- 'Add width-guide' button
+(Is disabled after pressing on it & 'Adding width-guide options' menu is opened) -->
+<button type="button"
+        [disabled]="showAddingOptions"
+        class="btn btn-info position add-width-guide-btn"
+        (click)="newWidthGuide()">הוספת רכז/ת תפעולי/ת</button>
+
+<!-- 'Adding width-guide options' menu -->
+<div *ngIf="showAddingOptions && !selectGuide"
+     class="position">
+        <!-- 'Guide as width-guide' button -->
+        <button type="button"
+                class="btn btn-dark position menu-btns"
+                style="top: 240px;"
+                (click)="guideAsWidthGuide()">מדריכ/ה כרכז/ת תפעולי/ת</button>
+        <!-- 'Add new width-guide' button-->
+        <button type="button"
+                class="btn btn-success position menu-btns"
+                style="top: 280px;"
+                (click)="addNewWidthGuide()">רכז/ת תפעולי/ת חדש/ה</button>
+        <!-- 'Cancel' button (closing the 'Adding width-guide options' menu) -->
+        <button type="button"
+                class="btn btn-danger position menu-btns"
+                style="top: 320px;"
+                (click)="cancel()">ביטול</button>
+</div>
+
+<!-- If user presses the 'Guide As width-guide' button this div is opened('Guides and coordinators' menu)
+(For getting all of the guides & coordinators in the system
+(To attach guide to coordinator that doesn't have a width-guide)) -->
+<div class="position"
+     *ngIf="selectGuide"
+     style="top:240px; left: 1040px;">
+        <!-- Field for all the guides in the system that doesn't have the 'width-guide' role -->
+        <label style="max-width: fit-content; color: #000;">מדריכים</label>
+        <select class="position"
+                style="width: fit-content;"
+                id="selectedGuide"
+                name="selectedGuide"
+                class="form-control"
+                [(ngModel)]="selectedGuide">
+                <option *ngFor="let guide of guidesList"
+                        [ngValue]="guide">{{guide.shekelMember.firstName}}</option>
+        </select>
+        <!-- Field for all the coordinators in the system that doesn't have a width-guide -->
+        <label style="max-width: fit-content; color: #000;">רכזות</label>
+        <select class="form-control position"
+                style="width: fit-content;"
+                id="selectedCoordinator"
+                name="selectedCoordinator"
+                [(ngModel)]="selectedCoordinator">
+                <option *ngFor="let coordinator of coordinatorsArray"
+                        [ngValue]="coordinator">{{coordinator.shekelMember.firstName}}</option>
+        </select>
+        <!-- Phone number -->
+        <div style="top: 1000px;">
+                <label for="phoneNumber"
+                       style="margin-top: 40px;"> <strong>: טלפון</strong> </label>
+                <input type="tel"
+                       (keypress)="omitSpecialChar($event)"
+                       id="phoneNumber"
+                       ngModel
+                       name="phoneNumber"
+                       class="form-control"
+                       [(ngModel)]="phoneNumber"
+                       maxlength="11">
+        </div>
+        <!-- 'Submit' button-->
+        <button type="button"
+                class="btn btn-primary position guide-as-width-guide-btn-position"
+                (click)="addGuideAsWidthGuide()">אישור</button>
+        <!-- 'Cancel' button -->
+        <button type="button"
+                class="btn btn-danger position guide-as-width-guide-btn-position"
+                style="left: 70px;"
+                (click)="cancelGuideAsWidthGuide()">ביטול</button>
+
+</div>
+<!-- For showing error/success messages -->
+<app-screen-msg-display *ngIf="msg !== ''"
+                        [msgDisplay]="msg"></app-screen-msg-display>
+
+<!-- In case user presses the 'Add new width-guide' button, navigating to 'user-edit' component -->
+<router-outlet></router-outlet>

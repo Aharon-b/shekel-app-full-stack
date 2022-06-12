@@ -1,0 +1,14 @@
+<!-- Button for adding medicine to tenant's medicine array -->
+<!-- 'medicine +' -->
+<button *ngIf=" loginType === 'coordinator' || loginType === 'width-guide'"
+        style=" left :auto ;"
+        class="btn btn-success"
+        (click)="newMedicine()">+ תרופה</button>
+
+<div class="line">תרופות</div>
+<!-- Tenant's medicine array -->
+<div style="display: flex;"
+     [ngClass]="{'scroll-list': medicineArray.length > 3}">
+        <app-medicine-details *ngFor="let medicine of medicineArray"
+                              [medicine]="medicine"></app-medicine-details>
+</div>

@@ -1,0 +1,323 @@
+<!-- Tables for 1.not guide's requests 2.guide's requests 3.guide's approved offers 
+     4.guide's offers (in that table there is in inside table for each offer that has requests 
+     in the system that fits the offer shift days & times) -->
+<!-- For all of the tables in the start & end shift tds are showing shift date + time but when mouse 
+     is on one of them the td will show shift date + day in week -->
+
+<div *ngIf="showPage"
+     class="page-class">
+    <!-- For going to 'guide-start' component -->
+    <button class="btn btn-close close-btn position"
+            (click)="back()"></button>
+    <div style="background-color: black;"
+         class="left-tables">
+        <!-- 'Replacements' -->
+        <h4 class="right-tables-h4"
+            style="background-color: aliceblue;">החלפות</h4>
+        <!-- Table for all replacements requests in the system that are not in approval proses -->
+        <table class="table-dark scroll rtl "
+               style="max-width: 555px;height: 230px;">
+            <div class="ltr"
+                 style="padding-left: 20px;">
+
+                <thead>
+                    <tr>
+                        <!-- 'Start' -->
+                        <th scope="col">התחלה</th>
+                        <!-- 'End' -->
+                        <th scope="col">סיום</th>
+                        <!-- 'In apartment' -->
+                        <th scope="col">בדירת</th>
+                        <!-- 'Comments' -->
+                        <th scope="col">הערות</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let replacementRequest of allNotGuidesReplacementsRequests;let i = index">
+                    <tr>
+
+                        <td style="font-size: 13px;"
+                            (mouseenter)="showDayInWeek(replacementRequest.start)"
+                            (mouseleave)="showShiftTime(replacementRequest.start)"
+                            class="date-and-time">
+                            {{reverseDate(replacementRequest.start.day.toLocaleString())}}
+
+                            <strong>{{replacementRequest.start.time}}</strong> </td>
+                        <td (mouseenter)="showDayInWeek(replacementRequest.end)"
+                            (mouseleave)="showShiftTime(replacementRequest.end)"
+                            style="font-size: 13px;"
+                            class="date-and-time">{{reverseDate(replacementRequest.end.day.toLocaleString())}}
+
+                            <strong>{{replacementRequest.end.time}}</strong></td>
+                        <!-- If user presses on the apartment's name the system will route to 'apartment-display' component  -->
+                        <td style="text-align: center;"> <a [routerLink]="[ '/guide/apartment-display/replacement' ]"
+                               [replaceUrl]="true"
+                               (click)="goToApartmentPage(replacementRequest.apartment)"
+                               style="text-decoration: none;"> {{replacementRequest.apartment.name}}
+                            </a></td>
+
+                        <!-- For request's comment -->
+
+                        <!-- If comment is empty -->
+                        <td *ngIf="replacementRequest.comments == null 
+                                   || replacementRequest.comments.length == 0"
+                            style="text-align: center;">------------</td>
+
+                        <!-- If comment has no more then 6 chars -->
+                        <td *ngIf="replacementRequest.comments != null 
+                                   && replacementRequest.comments.length < shortCommentLength">
+                            {{replacementRequest.comments}}</td>
+
+                        <!-- If comment has more then 6 chars , when mouse is not on the comment will show 6 chars
+                                 ,when mouse is on the comment, will show a box with the full comment on top of the td -->
+                        <td class="long-comment"
+                            *ngIf=" replacementRequest.comments != null && replacementRequest.comments.length >= shortCommentLength"
+                            (mouseenter)="showComments(replacementRequest.comments,$event,'250')"
+                            (mousemove)="showComments(replacementRequest.comments,$event,'250')"
+                            (mouseleave)="hideComments()"
+                            (wheel)="hideComments()">
+                            {{replacementRequest.comments.toString().substring(0,shortCommentLength)}}....
+                        </td>
+
+                        <!-- For guide to offer him self to the request -->
+                        <td scope="col"
+                            (click)="sendOfferToRequest(replacementRequest,i)">
+                            <button type="button"
+                                    class="btn btn-success"><img src="assets/pic/check-symbol-4816.png"
+                                     alt="שליחת הצעה להחלפה"></button>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </div>
+        </table>
+    </div>
+
+    <!-- Table for user's replacements requests -->
+    <div *ngIf="showPage"
+         class="left-tables"
+         style=" top: 280px;;background-color: #5bc0de;">
+        <!-- 'My requests'-->
+        <h4 class="right-tables-h4"
+            style="background-color: rgb(146, 37, 37); color: aliceblue;">בקשות החלפה
+            שלי</h4>
+        <ng-container *ngIf="allGuideRequests.length > 0; else noGuideRequests">
+
+            <table class="table-dark position"
+                   style="height: 240px;width: 585px;top: 29px;"
+                   [ngClass]="{'scroll rtl': allGuideRequests.length > 5}">
+                <div style="margin-left: 65px;"
+                     [ngClass]="{'ltr': allGuideRequests.length > 5}">
+                    <thead>
+                        <tr>
+                            <!-- 'Start' -->
+                            <th scope="col">התחלה</th>
+                            <!-- 'End' -->
+                            <th scope="col">סיום</th>
+                            <!-- 'In apartment' -->
+                            <th scope="col">בדירת</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let replacementRequest of allGuideRequests;let i = index">
+                        <tr id="indexTable2{{i}}">
+                            <td style="font-size: 13px;"
+                                (mouseenter)="showDayInWeek(replacementRequest.start)"
+                                (mouseleave)="showShiftTime(replacementRequest.start)"
+                                class="date-and-time">
+                                {{reverseDate(replacementRequest.start.day.toLocaleString())}}
+                                <strong>{{replacementRequest.start.time}}</strong> </td>
+                            <td style="font-size: 13px;"
+                                (mouseenter)="showDayInWeek(replacementRequest.end)"
+                                (mouseleave)="showShiftTime(replacementRequest.end)"
+                                class="date-and-time">
+                                {{reverseDate(replacementRequest.end.day.toLocaleString())}}
+
+                                <strong>{{replacementRequest.end.time}}</strong></td>
+                            <td>{{replacementRequest.apartment.name}}</td>
+                            <!-- For deleting the request the system -->
+                            <td scope="col"
+                                (click)="deleteReplacement(replacementRequest,allGuideRequests)">
+                                <!-- 'Delete request' -->
+                                <button type="button"
+                                        class="btn btn-danger">מחיקת בקשה</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </div>
+
+            </table>
+        </ng-container>
+        <!-- In case guide doesn't have any requests in the system -->
+        <ng-template #noGuideRequests
+                     style="top: 100px;position: absolute;">
+            <h1 style="margin-left: 150px;">
+                אין בקשות החלפה
+            </h1>
+        </ng-template>
+    </div>
+
+    <!-- Table for user offers that are approved -->
+    <div *ngIf="showPage"
+         style="background-color: blue;"
+         class="right-tables">
+        <!-- 'My approved offers' -->
+        <h4 style="background-color: red;width: 470px;">הצעות החלפה שאושרו </h4>
+        <ng-container *ngIf="guideReplacementApprovedOffers.length > 0; else noApprovedOffers">
+            <table style="margin-left: 0px;"
+                   class="table-dark scroll">
+                <div style="max-height: 230px;">
+                    <thead>
+                        <tr>
+                            <!-- 'Start' -->
+                            <th scope="col">התחלה</th>
+                            <!-- 'End' -->
+                            <th scope="col">סיום</th>
+                            <!-- 'In apartment' -->
+                            <th scope="col">בדירת</th>
+                            <!-- 'Comments' -->
+                            <th scope="col">הערות</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let replacementOffer of guideReplacementApprovedOffers;let i = index">
+                        <tr id="indexTable3{{i}}">
+                            <td style="font-size: 13px;height: 45px;"
+                                (mouseenter)="showDayInWeek(replacementOffer.start)"
+                                (mouseleave)="showShiftTime(replacementOffer.start)"
+                                class="date-and-time">
+                                {{reverseDate(replacementOffer.start.day.toLocaleString())}}
+
+                                <strong>{{replacementOffer.start.time}}</strong> </td>
+                            <td (mouseenter)="showDayInWeek(replacementOffer.end)"
+                                (mouseleave)="showShiftTime(replacementOffer.end)"
+                                style="font-size: 13px;"
+                                class="date-and-time">{{reverseDate(replacementOffer.end.day.toLocaleString())}}
+
+                                <strong>{{replacementOffer.end.time}}</strong></td>
+
+                            <td style="text-align: center;"> <a
+                                   [routerLink]="[ '/guide/apartment-display/replacement' ]"
+                                   [replaceUrl]="true"
+                                   (click)="goToApartmentPage(replacementOffer.apartment)"
+                                   style="text-decoration: none;color: black;"> {{replacementOffer.apartment.name}}
+                                </a></td>
+
+                            <!-- For offer's comment -->
+
+                            <!-- If comment is empty -->
+                            <td *ngIf="replacementOffer.comments == null"
+                                style="text-align: center;">------------</td>
+
+                            <!-- If comment has no more then 6 chars -->
+                            <td *ngIf="replacementOffer.comments != null 
+                                       && replacementOffer.comments.length <= shortCommentLength">
+                                {{replacementOffer.comments}}</td>
+
+                            <!-- If comment has more then 6 chars , when mouse is not on the comment will show 6 chars
+                                 ,when mouse is on the comment, will show a box with the full comment on top of the td -->
+                            <td style="text-align: center;"
+                                *ngIf=" replacementOffer.comments != null && replacementOffer.comments.length > shortCommentLength"
+                                (mouseenter)="showComments(replacementOffer.comments,$event,'900')"
+                                (mousemove)="showComments(replacementOffer.comments,$event,'900')"
+                                (mouseleave)="hideComments()"
+                                (wheel)="hideComments()">
+                                {{replacementOffer.comments.toString().substring(0,shortCommentLength)}}.......
+                            </td>
+                        </tr>
+                    </tbody>
+                </div>
+            </table>
+        </ng-container>
+        <!-- In case guide doesn't have approved offers in the system -->
+        <ng-template #noApprovedOffers>
+            <!-- 'No approved replacements requests' -->
+            <h4>אין הצעות החלפה שאושרו</h4>
+        </ng-template>
+    </div>
+
+    <!-- Table for user's offers from the system (for each offer that there are requests that match the offer shift time,
+        the request will appear under the offer line) -->
+    <div *ngIf="allGuideOffers && showOffers"
+         style="top: 280px; background-color: coral;"
+         class="right-tables"
+         [ngClass]="{'scroll place':allGuideOffers && allGuideOffers.length > 2}">
+        <!-- 'My Replacement offers' -->
+        <h4 style="background-color: black; color: aliceblue;">הצעות החלפה שלי</h4>
+        <ng-container *ngIf="allGuideOffers.length > 0; else guideAsNoOffers">
+
+            <table style="margin-left: 50px;position: relative;"
+                   *ngFor="let replacementOffer of allGuideOffers;let i = index">
+                <tr>
+                    <table class="table-dark">
+                        <tbody>
+                            <td style="font-size: 13px;min-width: 130px;"
+                                (mouseenter)="showDayInWeek(replacementOffer.start)"
+                                (mouseleave)="showShiftTime(replacementOffer.start)"
+                                class="date-and-time">
+                                <!-- 'Start' -->
+                                <h6>התחלה</h6>
+                                {{reverseDate(replacementOffer.start.day.toLocaleString())}}
+
+                                <strong>{{replacementOffer.start.time}}</strong>
+                            </td>
+                            <td (mouseenter)="showDayInWeek(replacementOffer.end)"
+                                (mouseleave)="showShiftTime(replacementOffer.end)"
+                                style="font-size:13px;"
+                                class="date-and-time">
+                                <!-- 'End' -->
+                                <h6>סיום</h6>
+                                {{reverseDate(replacementOffer.end.day.toLocaleString())}}
+
+                                <strong>{{replacementOffer.end.time}}</strong>
+                            </td>
+                            <!-- 'Delete offer' button -->
+                            <td scope="col"
+                                (click)="deleteReplacement(replacementOffer,allGuideOffers)"> <button type="button"
+                                        class="btn btn-danger">מחיקת הצעה</button>
+                            </td>
+                        </tbody>
+                    </table>
+                    <!-- Table for showing each offer requests the the shift times fits (in case there are in the system)-->
+                    <table style="width: 372px;height: 60px;"
+                           *ngIf="replacementOffer.requestOffers && replacementOffer.requestOffers.length > 0"
+                           [ngClass]="{'scroll':replacementOffer.requestOffers && replacementOffer.requestOffers.length > 1}">
+                        <tbody class="offer-has-requests"
+                               *ngFor="let replacementRequest of replacementOffer.requestOffers;let i = index">
+                            <b style="color: blue;"
+                               *ngIf="replacementOffer.requestOffers.length > 1">{{(i+1)}}</b>
+                            {{reverseDate(replacementRequest.start.day.toLocaleString())}}
+                            <strong>{{replacementRequest.start.time}}</strong>
+                            <a [routerLink]="[ '/guide/apartment-display/replacement' ]"
+                               [replaceUrl]="true"
+                               (click)="goToApartmentPage(replacementRequest.apartment)"
+                               style="text-decoration: none;color: red;">
+                                {{replacementRequest.apartment.name}}
+                            </a>
+                            <strong>{{replacementRequest.end.time}}</strong>
+                            {{reverseDate(replacementRequest.end.day.toLocaleString())}}
+                            <!-- 'Send' (offer & request for coordinator's approval) -->
+                            <button type="button"
+                                    class="btn btn-info"
+                                    (click)="sendRequestAndOfferToCoordinatorsApproval
+                                    (replacementRequest,replacementOffer.id)">שליחה</button>
+                            <!-- For displaying purposes -->
+                            <p *ngIf="(replacementOffer.requestOffers.length-1) !== i">
+                                -----------------------------------------</p>
+                        </tbody>
+                    </table>
+                </tr>
+            </table>
+        </ng-container>
+        <!-- In case guide has no offers in the system -->
+        <ng-template #guideAsNoOffers>
+            <!-- 'No replacement offers' -->
+            <h4>אין הצעות החלפה</h4>
+        </ng-template>
+    </div>
+</div>
+
+<!-- For showing Replacements requests comments in the 'Replacements' table -->
+<div *ngIf="showCommentsBoolean"
+     #commentsElement
+     id="commentsElement"
+     class="comment-display">
+    {{commentsString}}
+</div>

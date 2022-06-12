@@ -1,0 +1,16 @@
+/* In case there are mor then 3 chores to display */
+.scroll-list {
+    overflow-y: hidden;
+    overflow-x: scroll;
+}
+
+.header {
+    background-size : 300px 100px;
+    background-color: black;
+    color           : rgb(231, 227, 227);
+    text-align      : center;
+}
+
+.position {
+    position: relative;
+}

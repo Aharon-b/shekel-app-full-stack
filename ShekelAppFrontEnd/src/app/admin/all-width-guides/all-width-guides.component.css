@@ -1,0 +1,18 @@
+/*For the position of 'Add guide as width-guide' button & the 'submit' + 'cancel' buttons of this option */
+.guide-as-width-guide-btn-position {
+    width: 70px;
+    top  : 210px;
+}
+
+/*For the position of 'Add width-guide' button */
+.add-width-guide-btn {
+    top  : 190px;
+    left : 1040px;
+    width: fit-content;
+}
+
+/*For the position of the menu buttons ('Guide as width-guide' + 'Add new width-guide') */
+.menu-btns {
+    width: 230px;
+    left : 950px;
+}

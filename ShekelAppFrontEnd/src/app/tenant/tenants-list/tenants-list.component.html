@@ -1,0 +1,62 @@
+<br>
+<!-- Apartment details -->
+<h2>דירת {{apartment.name}} <h4>{{apartment.address}}</h4>
+</h2>
+{{apartment.phoneNumber}}
+<hr>
+
+<!-- 'Go back' button -->
+<button class="btn btn-primary position btn-back"
+        (click)="back()"
+        [disabled]="!backButtonDisplay">חזרה</button>
+
+<!-- 'Update' button (only for Coordinator type)-->
+<button class="btn btn-warning position"
+        *ngIf="loginType === 'coordinator'"
+        style="left: 1000px;"
+        (click)="updateApartmentDetails()">
+        <img style="width: 30px; height:30px;"
+             src="assets/pic/56061843-update-refresh-icon-yellow-square-button.jpg"
+             alt="עדכון פרטי דירה">
+</button>
+
+<!-- Apartment tenants array -->
+<div *ngIf="tenantsArray.length > 0"
+     style="display: flex;">
+
+        <div *ngFor="let tenant of tenantsArray;let i=index">
+                <!-- tenant name -->
+                <a class="card tenant-card"
+                   (click)="getTenantDetails(tenant)"
+                   style="width: fit-content;">{{tenant.shekelMember.firstName}} {{tenant.shekelMember.lastName}}
+                </a>
+                <!-- 'Deleting tenant from apartment's tenants array' button (only for Coordinator type)-->
+                <button *ngIf="loginType === 'coordinator'"
+                        (click)="deleteTenantFromApartment(tenant,i)"><img style="max-height: 20px;"
+                             src="assets/pic/14796741191530273515-128.png"
+                             alt="מחיקת דייר.ת מהדירה"></button>
+        </div>
+        <br>
+</div>
+
+<br>
+
+<!-- For error messages display -->
+<p style="background-color: red; width: 240px;">{{errorMsg}}</p>
+
+<!-- 'Apartment guides' (for Coordinator/WidthGuide types)-->
+<button *ngIf="displayApartmentGuidesArray && loginType === 'coordinator' || loginType === 'width-guide'"
+        class="btn btn-primary"
+        (click)="guidesDisplay()">מדריכים</button>
+
+<!-- 'Close 'guides-list' component' -->
+<button *ngIf="!displayApartmentGuidesArray"
+        class="btn btn-danger"
+        (click)="closeGuidesDisplay()">סגירה</button>
+
+<!-- For success 'deleting tenant from apartment' message -->
+<app-screen-msg-display *ngIf="tenantDeletedDisplayMsg !== ''"
+                        [msgDisplay]="tenantDeletedDisplayMsg"></app-screen-msg-display>
+
+<!-- Routing to 'tenant-details' or 'guides-list' component (if user is Coordinator/WidthGuide type) -->
+<router-outlet></router-outlet>

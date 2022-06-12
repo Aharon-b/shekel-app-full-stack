@@ -1,0 +1,46 @@
+<!-- All coordinators in system table -->
+<div class="position table-position"
+     [ngClass]="{'scroll': coordinatorsArray.length > 6}">
+
+    <table>
+        <thead>
+            <tr>
+                <!-- Name -->
+                <th>שם</th>
+                <!-- Phone number -->
+                <th>טלפון</th>
+                <!-- Apartments -->
+                <th>דירות</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+
+            <tr *ngFor="let coordinator of coordinatorsArray;let i = index">
+                <td>{{i + 1}}- {{coordinator.shekelMember.firstName}} {{coordinator.shekelMember.lastName}}</td>
+                <td>{{coordinator.shekelMember.phoneNumber}}</td>
+                <!-- A td div for displaying each coordinator apartments -->
+                <div *ngFor="let apartment of coordinator.apartments;let i = index"
+                     [ngClass]="{'padding': coordinator.apartments.length === 1}">
+                    <h6 *ngIf="coordinator.apartments && coordinator.apartments.length > 0"
+                        style="display: flex; "> <b *ngIf="coordinator.apartments.length > 1">{{i + 1}}.</b>
+                        {{apartment.name}}</h6>
+                </div>
+                <!-- In case coordinator has no apartments -->
+                <td *ngIf="coordinator.apartments.length === 0">---------</td>
+
+                <td>
+                    <!-- 'Delete coordinator from system' button -->
+                    <button type="button"
+                            class="btn btn-danger"
+                            (click)="deleteCoordinatorFromSystem(coordinator)">מחיקה</button>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- For showing error/success messages -->
+<app-screen-msg-display *ngIf="msg !== ''"
+                        [msgDisplay]="msg"></app-screen-msg-display>

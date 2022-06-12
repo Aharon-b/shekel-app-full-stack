@@ -1,0 +1,36 @@
+<a>
+  <div>
+    <!-- Tenant details -->
+    <h5> <strong> {{tenant.shekelMember.firstName}} {{tenant.shekelMember.lastName}} </strong></h5>
+    {{tenant.description}}
+    <br>
+    {{tenant.shekelMember.phoneNumber}}
+    <br>
+    {{tenant.workPlace}}
+    <br>
+    {{reverseDate(tenant.birthDay.toLocaleString())}}
+
+    <!-- 'Update tenant details' button -->
+    <button *ngIf="loginType === 'coordinator'"><img style="max-height: 20px;"
+           src="assets/pic/56061843-update-refresh-icon-yellow-square-button.jpg"
+           alt="icon for updating tenant details"
+           (click)="updateTenantDetails()"></button>
+
+    <!-- Tenant's image -->
+    <img class="position image img-thumbnail"
+         [src]="imageUrl"
+         alt="תמונה של הדייר">
+  </div>
+</a>
+
+<!-- 'Back to tenants list' button -->
+<button class="btn btn-primary position back-btn"
+        (click)="backToTenantsList()">חזרה לרשימת הדיירים</button>
+
+<br *ngIf="loginType === 'guide'">
+
+<app-medicine-list [medicineArray]="tenant.medicine"></app-medicine-list>
+
+<hr *ngIf="showHr">
+
+<app-chores-list [choresArray]="tenant.chores"></app-chores-list>

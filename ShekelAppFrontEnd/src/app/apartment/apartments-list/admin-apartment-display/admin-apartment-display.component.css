@@ -1,0 +1,6 @@
+/* For td of all apartments in the system with no coordinator */
+.no-coordinator {
+    color         : red;
+    vertical-align: text-top;
+    font-size     : 17px;
+}

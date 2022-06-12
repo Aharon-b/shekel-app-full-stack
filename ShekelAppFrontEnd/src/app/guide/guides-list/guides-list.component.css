@@ -1,0 +1,17 @@
+/* All classes are for displaying purposes */
+
+.list-display {
+    overflow-y: hidden;
+    width     : 1200px;
+}
+
+.plus-btn-position {
+    top   : 250px;
+    left  : 150px;
+    height: 40px;
+}
+
+.select-position {
+    top : 460px;
+    left: 80px;
+}

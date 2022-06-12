@@ -1,0 +1,52 @@
+<!-- Loading scroll until the table data is loaded -->
+<app-loading-page *ngIf="tenantsArray.length < 1 && !toShowTable"
+                  class="position column-top"></app-loading-page>
+<!-- In case there is nothing to show -->
+<!-- ('No tenants in the system')-->
+<h1 *ngIf="toShowTable"
+    class="position column-top">אין דיירים במערכת</h1>
+<!-- Checking if there are tenants on the 'tenantsList' -->
+<div *ngIf="tenantsArray.length > 1">
+    <!-- All tenants in system table -->
+    <div class="position table-position"
+         [ngClass]="{'scroll': tenantsArray.length > 7}">
+        <table>
+            <thead>
+                <tr>
+                    <!-- Name -->
+                    <th>שם</th>
+                    <!-- Phone number -->
+                    <th>טלפון</th>
+                    <!-- Apartment -->
+                    <th>דירה</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let tenant of tenantsArray;let i = index">
+                    <td style="vertical-align: text-top;">{{i + 1}}. {{tenant.shekelMember.firstName}}
+                        {{tenant.shekelMember.lastName}}</td>
+                    <td style="vertical-align: text-top;">{{tenant.shekelMember.phoneNumber}}</td>
+                    <td>
+                        <ng-container *ngIf="tenant.apartment.name !== ''; else noApartmentTemplate">
+                            {{tenant.apartment.name}}
+                        </ng-container>
+                        <!-- In case a tenant isn't registered in any apartment -->
+                        <ng-template #noApartmentTemplate>
+                            ---------
+                        </ng-template>
+                    </td>
+                    <!-- 'Delete tenant from system' button -->
+                    <td><button type="button"
+                                class="btn btn-danger"
+                                (click)="deleteTenantFromSystem(tenant)">מחיקה</button></td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- For showing error/success messages -->
+    <app-screen-msg-display *ngIf="msg !== ''"
+                            [msgDisplay]="msg"></app-screen-msg-display>
+</div>

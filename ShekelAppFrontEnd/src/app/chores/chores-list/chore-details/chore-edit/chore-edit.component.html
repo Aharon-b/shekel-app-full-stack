@@ -1,0 +1,64 @@
+<hr>
+<div class="container">
+    <!-- Form for adding/updating chore details -->
+    <form (ngSubmit)="onSubmit()">
+        <div class="row h-1 justify-content-center align-items-center">
+            <div class="col-6">
+                <div class="form-group">
+                    <!-- Chore name -->
+                    <label for="name">שם המטלה</label>
+                    <input type="text"
+                           id="name"
+                           ngModel
+                           name="name"
+                           class="form-control"
+                           [(ngModel)]="chore.name"
+                           maxlength="30">
+                </div>
+
+                <div class="form-group">
+                    <!-- Chore details -->
+                    <label for="description">תיאור המטלה</label>
+                    <input type="text"
+                           id="description"
+                           ngModel
+                           name="description"
+                           class="form-control"
+                           [(ngModel)]="chore.description"
+                           maxlength="200">
+                </div>
+
+                <select name="daysOfWeekStringList"
+                        class="form-control"
+                        [(ngModel)]="selectedDay">
+                    <!-- Chore day -->
+                    <option *ngFor="let day of daysOfWeekStringArray"
+                            [ngValue]="day">{{day}}</option>
+                </select>
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col-2">
+                        <!-- Submit button -->
+                        <button class="btn btn-primary"
+                                type="submit">אישור</button>
+                    </div>
+
+                    <div class="col-2">
+                        <!-- Clear button -->
+                        <button class="btn btn-secondary"
+                                type="button"
+                                (click)="onClear()">ניקוי</button>
+
+                    </div>
+                    <div class="col-2">
+                        <!-- Cancel button -->
+                        <button class="btn btn-danger"
+                                type="button"
+                                (click)="onCancel()">ביטול</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

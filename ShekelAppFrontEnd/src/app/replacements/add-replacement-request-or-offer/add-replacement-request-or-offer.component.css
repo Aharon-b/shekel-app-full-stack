@@ -1,0 +1,27 @@
+ /* For form visibility & position on the page */
+ .form-display {
+     top             : 30px;
+     background-color: blue;
+     width           : 300px;
+     height          : 500px;
+     left            : 450px;
+     overflow        : hidden;
+     position        : absolute;
+     border-radius   : 6%;
+ }
+
+ /* For cancel button position */
+ .cancel-btn {
+     top  : 93%;
+     left : 150px;
+     width: 150px;
+ }
+
+ /* For component position */
+ app-screen-msg-display {
+     position: absolute;
+     top     : 40px;
+     z-index : 2;
+     left    : 50px;
+     width   : 200px;
+ }

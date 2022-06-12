@@ -1,0 +1,56 @@
+<!-- A form html file for adding/updating admin details in the system -->
+<form (ngSubmit)="onSubmit()">
+    <!-- Username field (Email)-->
+    <div class="form-group">
+        <label for="username"
+               style="margin-left: 174px;">אימייל</label>
+        <input type="text"
+               id="username"
+               ngModel
+               name="username"
+               class="form-control"
+               [(ngModel)]="username"
+               maxlength="30">
+    </div>
+
+    <!-- Password field -->
+    <div class="form-group"
+         *ngIf="editMode">
+        <label for="password">סיסמה</label>
+        <input type="password"
+               id="password"
+               ngModel
+               name="password"
+               class="form-control"
+               [(ngModel)]="password"
+               maxlength="15">
+    </div>
+
+    <div class="col-2">
+        <!-- A button for submitting the from (is disabled if the condition is false) -->
+        <button class="btn btn-primary position btn-top"
+                type="submit"
+                [disabled]='username.length < 7'>אישור</button>
+
+    </div>
+
+    <div class="col-2">
+        <!-- A button for clearing the from fields  -->
+        <button class="btn btn-secondary position btn-top"
+                style="left: 180px;"
+                type="button"
+                (click)="onClear()">ניקוי</button>
+    </div>
+
+    <div class="col-2">
+        <!-- A button for canceling the operation -->
+        <button style="left: 333px;"
+                class="btn btn-danger position btn-top"
+                type="button"
+                (click)="onCancel()">ביטול</button>
+    </div>
+
+</form>
+<!-- For showing error/success messages -->
+<app-screen-msg-display [msgDisplay]="msg"
+                        style="z-index: 2;"></app-screen-msg-display>

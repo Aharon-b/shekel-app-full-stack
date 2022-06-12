@@ -1,0 +1,26 @@
+<div class="card chore-card"
+     style="width: 18rem;">
+       <div class="card-body">
+              <!-- Name of the chore -->
+              <h5>שם המטלה: {{chore.name}}</h5>
+              <!-- Description of the chore -->
+              <b>תיאור המטלה: {{chore.description}}</b>
+              <br>
+              <!-- Day of the chore -->
+              יום: {{chore.day}}
+              <br>
+              <div *ngIf=" loginType === 'coordinator' || loginType === 'width-guide'">
+                     <!-- For updating chore details -->
+                     <button><img style="max-height: 20px;"
+                                 src="assets/pic/56061843-update-refresh-icon-yellow-square-button.jpg"
+                                 alt="עדכון פרטי מטלה"
+                                 (click)="updateChoreDetails()"></button>
+
+                     <!-- For deleting chore from the system -->
+                     <button><img style="max-height: 20px;"
+                                 src="assets/pic/14796741191530273515-128.png"
+                                 alt="מחיקת מטלה מהמערכת"
+                                 (click)="deleteChoreFromSystem()"></button>
+              </div>
+       </div>
+</div>

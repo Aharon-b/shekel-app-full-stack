@@ -1,0 +1,73 @@
+/* for the top buttons in the operations menu */
+.top-btn-position {
+    top  : 8px;
+    width: fit-content;
+}
+
+/* For the 'app-edit-admin' component */
+.admin-edit-position {
+    z-index         : 1;
+    top             : 170px;
+    left            : 400px;
+    background-color: #F0FFFF;
+    width           : 400px;
+    height          : 230px;
+    border          : black solid;
+    border-radius   : 7px;
+}
+
+/* General setting for all options buttons */
+.options {
+    width              : 200px;
+    height             : 50px;
+    text-align         : center;
+    cursor             : pointer;
+    text-decoration    : none;
+    line-height        : 70px;
+    border-style       : outset;
+    transition-duration: .3s;
+}
+
+/* When going hover a option button */
+.options:hover {
+    color: aliceblue;
+}
+
+/* To emphasize the pressed button*/
+.bgc {
+    background-color: red;
+}
+
+/* Classes for options buttons position */
+
+.row-1 {
+    top: 50px;
+}
+
+.row-2 {
+    top: 110px;
+}
+
+.position-1 {
+    left: 20px;
+}
+
+.position-2 {
+    left: 220px;
+}
+
+.position-3 {
+    left: 420px;
+}
+
+.position-4 {
+    left: 620px;
+}
+
+.position-5 {
+    left: 820px;
+}
+
+.position-6 {
+    left: 1020px;
+}

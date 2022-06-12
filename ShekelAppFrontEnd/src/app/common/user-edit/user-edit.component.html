@@ -1,0 +1,138 @@
+<div class="container"
+     [ngClass]="{'admin-component-position': !editMode}">
+    <!-- Form for adding/updating user's details -->
+    <form (ngSubmit)="onSubmit()">
+        <div class="row h-1 ">
+            <div class="col-6">
+                <div class="form-group">
+                    <!-- First name -->
+                    <label for="firstName"> שם פרטי </label>
+                    <input type="text"
+                           id="firstName"
+                           ngModel
+                           name="firstName"
+                           class="form-control"
+                           [(ngModel)]="shekelMember.firstName"
+                           maxlength="30">
+                </div>
+
+                <div class="form-group">
+                    <!-- Last name -->
+                    <label for="lastName"> שם משפחה</label>
+                    <input type="text"
+                           id="lastName"
+                           ngModel
+                           name="lastName"
+                           class="form-control"
+                           [(ngModel)]="shekelMember.lastName"
+                           maxlength="15">
+                </div>
+
+                <!-- Is displayed if the 'phoneNumber' input field is not only numbers
+                    (and the third char is not an hyphen char) -->
+                <p style="color: red;"> <strong>{{invalidPhoneNumberMsg}}</strong> </p>
+                <div class="form-group position"
+                     [ngClass]="editMode ? 'user-top' : 'admin-top'">
+                    <!-- Phone number -->
+                    <label for="phoneNumber"> טלפון</label>
+                    <input type="tel"
+                           (keypress)="omitSpecialChar($event)"
+                           id="phoneNumber"
+                           ngModel
+                           name="phoneNumber"
+                           class="form-control"
+                           [(ngModel)]="shekelMember.phoneNumber"
+                           maxlength="11">
+                    <div *ngIf="!editMode && addingWidthGuide"
+                         style="position: absolute;left: 230px;top: 0px;">
+
+                        <!-- All Coordinator in the system without widthGuide 
+                        (will appear when user type admin is adding a new 'width-guide' user to the system) -->
+                        <label style="max-width: fit-content; color: #000;">רכזות</label>
+                        <select class="form-control position"
+                                style="width: fit-content;"
+                                id="selectedCoordinator"
+                                name="selectedCoordinator"
+                                [(ngModel)]="selectedCoordinator">
+                            <option *ngFor="let coordinator of allCoordinatorsNoWidthGuideArray"
+                                    [ngValue]="coordinator">{{coordinator.shekelMember.firstName}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Gender (will appear when user type admin is adding a new 'guide' user to the system)-->
+                <div class="right-side-rows position">
+                    <div *ngIf="
+                    !editMode && addingGuide"
+                         class="form-group">
+                        מין:
+                        <select name="genderStringList"
+                                class="form-control"
+                                [(ngModel)]="selectedGender">
+                            <option *ngFor="let gender of genderStringArray"
+                                    [ngValue]="gender">{{gender}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <!-- Email (username) -->
+                        <label for="username"> אימייל</label>
+                        <input type="email"
+                               id="username"
+                               ngModel
+                               name="username"
+                               class="form-control"
+                               [(ngModel)]="username"
+                               maxlength="10">
+                    </div>
+
+                    <!-- Image -->
+                    <div *ngIf="!addingWidthGuide">
+                        <label htmlFor='image'>
+                            <h5 style="color: black;"> תמונה</h5>
+                            <br>
+                            <input type='file'
+                                   id='file'
+                                   name="file"
+                                   accept="image/*"
+                                   placeholder="Upload an Image"
+                                   required
+                                   value={image}
+                                   (change)="setImage($event)" />
+                        </label>
+
+                        <img style="background-color: aliceblue;"
+                             [src]="image"
+                             style="width: 100px; height: 100px;">
+                    </div>
+                </div>
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="row">
+
+                    <!-- Submit button -->
+                    <button class="btn btn-primary button-1 button-size position "
+                            [ngClass]="editMode ? 'user-button-top' : 'admin-button-top'"
+                            type="submit"
+                            [disabled]="this.shekelMember.firstName == undefined || this.shekelMember.firstName.length === 0 ||
+                              this.shekelMember.lastName == undefined || this.shekelMember.lastName.length === 0 ||
+                              this.username == undefined || this.username.length === 0 "> אישור</button>
+
+                    <!-- Clear fields button -->
+                    <button class="btn btn-secondary button-2 button-size position"
+                            [ngClass]="editMode ? 'user-button-top' : 'admin-button-top'"
+                            type="button"
+                            (click)="onClear()"> ניקוי</button>
+
+                    <!-- Cancel operation button  -->
+                    <button class="btn btn-danger button-3 button-size position"
+                            [ngClass]="editMode ? 'user-button-top' : 'admin-button-top'"
+                            type="button"
+                            (click)="onCancel()"> ביטול</button>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

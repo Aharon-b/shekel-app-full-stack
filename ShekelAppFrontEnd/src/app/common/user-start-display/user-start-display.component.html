@@ -1,0 +1,41 @@
+<div *ngIf="shekelMember">
+        <!-- User details -->
+        {{shekelMember.firstName}}
+        <br>
+        {{shekelMember.lastName}}
+        <br>
+        {{shekelMember.phoneNumber}}
+</div>
+
+<div [ngClass]="{'position guide-user': isGuideUser}">
+        <!-- Logout button-->
+        <button type="button"
+                class="btn btn-primary position-1"
+                (click)="logOut()">יציאה מהמערכת</button>
+
+        <!-- Update details button -->
+        <button type="button"
+                class="btn btn-warning  position-2"
+                (click)="updateUserDetails()">עדכון פרטים</button>
+
+        <!-- Update password button -->
+        <button type="button"
+                class="btn btn-dark position-3"
+                (click)="updateUserPassword()">עדכון סיסמה</button>
+
+        <!-- Add replacement request button -->
+        <button type="button"
+                *ngIf="userTenants.length > 0"
+                class="btn btn-success position-4"
+                (click)="addReplacementRequestOrOffer(true)">בקשת החלפה</button>
+
+        <!-- Add replacement offer button -->
+        <button type="button"
+                *ngIf="isGuideUser"
+                class="btn btn-info"
+                [ngClass]="userTenants.length > 0 ? 'position-5' : 'position-4'"
+                id="offerReplacementButton"
+                (click)="addReplacementRequestOrOffer(false)">הצעת החלפה</button>
+</div>
+<!-- All tenants in user's apartments -->
+<app-users-tenants [userTenants]="userTenants"></app-users-tenants>

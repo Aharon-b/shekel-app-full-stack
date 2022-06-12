@@ -1,0 +1,18 @@
+<!-- Only user type Coordinator/WidthGuide can add chore to tenant chores array ('add chore' button) -->
+<button *ngIf=" loginType === 'coordinator' || loginType === 'width-guide'"
+        class="btn btn-primary position"
+        (click)="newChore()">+ מטלה</button>
+
+<div *ngIf="choresArray.length > 0">
+    <!-- 'Chores' -->
+    <div class="header">
+        מטלות
+    </div>
+    <!-- Tenant chores array  -->
+    <div style="display: flex;"
+         [ngClass]="{'scroll-list': choresArray.length > 3}">
+        <app-chore-details *ngFor="let chore of choresArray"
+                           [chore]="chore"></app-chore-details>
+    </div>
+
+</div>

@@ -1,0 +1,20 @@
+<!-- Apartment name & image -->
+<div class="item-group">
+  <a class="card apartment-display"
+     (click)="apartmentDisplay(apartment)">
+    {{apartment.name}}
+    <img class="img-thumbnail card-img"
+         [src]="image"
+         alt="תמונה של הדירה">
+  </a>
+  <!-- A button for deleting apartment from coordinator apartments array -->
+  <button type="button"
+  *ngIf="userType === 'coordinator'"
+          (click)="deleteApartmentFromCoordinatorList()"> <img style="width: 50px;height: 50px;"
+         src="assets/pic/14796741191530273515-128.png"
+         alt="מחיקת דירה מרשימת דירות של רכז.ת"></button>
+</div>
+
+<!-- For showing success deleting apartment from coordinator apartments array in the system message-->
+<app-screen-msg-display *ngIf="msgString !== ''"
+                        [msgDisplay]="msgString"></app-screen-msg-display>

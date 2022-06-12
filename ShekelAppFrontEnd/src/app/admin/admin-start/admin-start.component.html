@@ -1,0 +1,93 @@
+<!-- If user still has default password  -->
+<app-change-password-display *ngIf="!passwordUpdatedBoolean"
+                                     [defaultPassword]=true></app-change-password-display>
+<!-- If user password is updated -->
+<div *ngIf="passwordUpdatedBoolean">
+
+   <div *ngIf="showOptions"
+        style="left: 1000px;">
+      <!-- Logging out button -->
+      <button type="button"
+              class="btn btn-primary position top-btn-position"
+              style="left: 1100px;"
+              (click)="logout()">יציאה מהמערכת</button>
+      <!-- Adding admin into system button -->
+      <button type="button"
+              class="btn btn-info position top-btn-position"
+              style="left: 950px; "
+              (click)="addAdmin()">הוספת מנהל/ת</button>
+      <!-- Updating Admin details button -->
+      <button type="button"
+              class="btn btn-warning position top-btn-position"
+              style="left: 820px; "
+              (click)="updateAdminDetails()">עדכון פרטים</button>
+      <!-- Deleting admins account from system button -->
+      <button type="button"
+              class="btn btn-danger position top-btn-position"
+              style="left: 610px; "
+              (click)="deleteAdminFromSystem()">מחיקת חשבון מהמערכת</button>
+
+      <!-- All options buttons 
+      when clicking on one of the options calling a function that navigates to the selected option-->
+      <!-- (All of the buttons calls 'setOnDisplay()') -->
+      <!-- ('Add new guide to system' & 'Add new coordinator to system' buttons calls setEditingGuideField() function) -->
+
+      <!-- 'All apartments in system' button -->
+      <p class="position options row-1 position-1"
+         (click)="setOnDisplay('first', 'admin')"
+         [ngClass]="{'bgc': onDisplay === 'first'}"> דירות</p>
+      <!-- 'All tenants in system' button -->
+      <p class="position options row-1 position-2"
+         (click)="setOnDisplay('second', 'admin/all-tenants-in-system')"
+         [ngClass]="{'bgc': onDisplay === 'second'}"> דיירים</p>
+      <!-- 'All guides in system' button -->
+      <p class="position options row-1 position-3"
+         (click)="setOnDisplay('third', 'admin/all-guides-in-system')"
+         [ngClass]="{'bgc': onDisplay === 'third'}"> מדריכים</p>
+      <!-- 'All coordinators in system' button -->
+      <p class="position options row-1 position-4"
+         (click)="setOnDisplay('fourth', 'admin/all-coordinators-in-system')"
+         [ngClass]="{'bgc': onDisplay === 'fourth'}"> רכזות</p>
+      <!-- 'All width guides in system' button -->
+      <p class="position options row-1 position-5"
+         (click)="setOnDisplay('fifth', 'admin/all-width-guides-in-system')"
+         [ngClass]="{'bgc': onDisplay === 'fifth'}"> רכזות תפעוליות</p>
+      <!-- 'All guides with no apartments' button -->
+      <p class="position options row-1 position-6"
+         (click)="setOnDisplay('sixth', 'admin/all-guides-no-apartments-in-system')"
+         [ngClass]="{'bgc': onDisplay === 'sixth'}"> מדריכים ללא דירות</p>
+      <!-- 'Add new guide to system' button -->
+      <p class="position options row-2 position-2"
+         (click)="setEditingGuideField(true);setOnDisplay('seventh', 'admin/guide-edit')"
+         [ngClass]="{'bgc': onDisplay === 'seventh'}"> הוספת מדריכ\ה</p>
+      <!-- 'Add new tenant to system' button -->
+      <p class="position options row-2 position-3"
+         (click)="setOnDisplay('eighth', 'admin/tenant-edit')"
+         [ngClass]="{'bgc': onDisplay === 'eighth'}">הוספת דייר\ת </p>
+      <!-- 'Add new apartment to system' button -->
+      <p class="position options row-2 position-1"
+         (click)="setOnDisplay('ninth', 'admin/apartment-edit')"
+         [ngClass]="{'bgc': onDisplay === 'ninth'}"> הוספת דירה</p>
+      <!-- 'Add new coordinator to system' button -->
+      <p class="position options row-2 position-4"
+         (click)="setEditingGuideField(false);setOnDisplay('tenth', 'admin/coordinator-edit')"
+         [ngClass]="{'bgc': onDisplay === 'tenth'}"> הוספת רכז\ת</p>
+      <!-- 'All apartments with no coordinator' button -->
+      <p class="position options row-2 position-5"
+         (click)="setOnDisplay('eleventh', 'admin/all-apartments-no-coordinator-in-system')"
+         [ngClass]="{'bgc': onDisplay === 'eleventh'}"> דירות ללא רכזת</p>
+      <!-- 'All tenants with no apartment' button -->
+      <p class="position options row-2 position-6"
+         (click)="setOnDisplay('twelfth', 'admin/all-tenants-no-apartment-in-system')"
+         [ngClass]="{'bgc': onDisplay === 'twelfth'}"> דיירים ללא דירה</p>
+
+   </div>
+   <!-- Routing to the selected component -->
+   <router-outlet></router-outlet>
+</div>
+<!-- Adding new admin to system or updating logged in admin details -->
+<app-edit-admin *ngIf="showEdit"
+                class="position admin-edit-position"
+                [username]='username'
+                [password]='password'
+                [editMode]='editMode'></app-edit-admin>

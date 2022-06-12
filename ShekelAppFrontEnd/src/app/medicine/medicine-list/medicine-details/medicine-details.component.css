@@ -1,0 +1,21 @@
+/* For each medicine in the tenant's medicine array */
+
+.medicine-card {
+    width           : 16rem;
+    margin-right    : 20px;
+    background-color: blue;
+}
+
+.image {
+    width              : 80px;
+    height             : 80px;
+    top                : 15px;
+    left               : 150px;
+    transition-duration: .3s;
+}
+
+.image:hover {
+    left  : 130px;
+    width : 100px;
+    height: 100px;
+}

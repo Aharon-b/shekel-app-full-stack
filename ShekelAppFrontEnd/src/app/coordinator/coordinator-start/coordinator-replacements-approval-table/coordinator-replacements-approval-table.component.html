@@ -1,0 +1,21 @@
+<!-- (If guide sees in the replacements requests table a shift that he wants to take or 
+      in the offers table a replacement that matches his offer he can press on a button and 
+      the system will send the request and offer the apartment's coordinator for approval) -->
+<!-- Table for showing all replacements (request + offer) that coordinator needs to approve/deny -->
+<div *ngIf="coordinatorApprovalArray.length > 0"
+     [ngClass]="{'scroll': coordinatorApprovalArray.length > 4}">
+
+    <tbody *ngFor="let approvalObj of coordinatorApprovalArray ;let i = index">
+        <!-- For each replacement request -->
+        {{(i+1)}}<td id="index{{i}}"></td>
+        <td class="small-td">
+            <!-- Button for approving offer for replacement -->
+            <button class="btn btn-success"
+                    type="button"
+                    (click)="onApproval(i)"></button>
+            <!-- Button for denying offer for replacement -->
+            <button class="btn btn-danger"
+                    type="button"
+                    (click)="onReject(i)"></button></td>
+    </tbody>
+</div>

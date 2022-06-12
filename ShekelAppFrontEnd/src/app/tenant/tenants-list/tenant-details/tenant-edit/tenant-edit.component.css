@@ -1,0 +1,13 @@
+/* If user is Admin type */
+.admin-component-position {
+    margin-top      : 160px;
+    margin-left     : 75px;
+    background-color: beige;
+    height          : 300px;
+}
+
+.right-side-rows {
+    left : 640px;
+    top  : 160px;
+    width: 400px;
+}

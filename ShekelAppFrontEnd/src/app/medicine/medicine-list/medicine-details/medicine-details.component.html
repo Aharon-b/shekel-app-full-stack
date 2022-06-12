@@ -1,0 +1,29 @@
+<div class="card medicine-card">
+  <!-- Medicine details -->
+  <div class="card-body">
+    <h5> <strong> {{medicine.name}} </strong> </h5>
+    <b> {{medicine.amount}}</b>
+    <br>
+    <b> {{medicine.time}}</b>
+    <br>
+    <img class="rounded-circle position image"
+         [src]="imageUrl"
+         alt="תמונה של התרופה">
+
+    <div *ngIf=" loginType === 'coordinator' || loginType === 'width-guide'">
+
+      <!-- Update button -->
+      <button><img style="max-height: 20px;"
+             src="assets/pic/56061843-update-refresh-icon-yellow-square-button.jpg"
+             alt="כפתור עדכון פרטי תרופה"
+             (click)="updateMedicine()"></button>
+
+      <!-- Delete button -->
+      <button><img style="max-height: 20px;"
+             src="assets/pic/14796741191530273515-128.png"
+             alt="כפתור מחיקת תרופה מהמערכת"
+             (click)="deleteMedicine()"></button>
+
+    </div>
+  </div>
+</div>

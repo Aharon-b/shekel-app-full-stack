@@ -1,0 +1,14 @@
+/* For 'Back to tenants list' button position */
+.back-btn {
+  left     : 900px;
+  top      : 30px;
+  min-width: 190px;
+}
+
+/* For tenant's image size and position */
+.image {
+  width : 130px;
+  height: 130px;
+  top   : 5px;
+  left  : 500px;
+}

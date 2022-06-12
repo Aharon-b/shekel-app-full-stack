@@ -1,0 +1,36 @@
+/* For each tenant display */
+.tenant-card {
+  cursor         : pointer;
+  width          : 50px;
+  margin-right   : 30px;
+  display        : flex;
+  cursor         : pointer;
+  text-decoration: none;
+  text-align     : center;
+}
+
+.tenant-card:hover {
+  background-color: brown;
+  color           : white;
+}
+
+/* For 'back' button position */
+.btn-back {
+  left: 1000px;
+  top : 30px;
+}
+
+/* For when apartment has no tenants */
+.no-tenants-message {
+  position        : absolute;
+  top             : 110px;
+  left            : 100px;
+  color           : black;
+  background-color: aliceblue;
+  border-style    : outset;
+  width           : 800px;
+  min-height      : 60px;
+  max-height      : fit-content;
+  text-align      : center;
+  padding-top     : 10px;
+}

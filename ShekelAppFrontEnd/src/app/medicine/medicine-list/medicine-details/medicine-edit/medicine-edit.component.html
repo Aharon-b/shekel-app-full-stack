@@ -1,0 +1,88 @@
+<hr>
+<!-- Create/update medicine details form  -->
+<div class="container">
+
+    <form (ngSubmit)="onSubmit()">
+        <div class="row h-1 justify-content-center align-items-center">
+            <div class="col-6">
+                <!-- Name -->
+                <div class="form-group">
+                    <label for="name">שם</label>
+                    <input type="text"
+                           id="name"
+                           ngModel
+                           name="name"
+                           class="form-control"
+                           [(ngModel)]="medicine.name"
+                           maxlength="30">
+                </div>
+
+                <div class="form-group">
+                    <!-- Amount -->
+                    <label for="amount">כמות</label>
+                    <input type="number"
+                           id="amount"
+                           ngModel
+                           name="amount"
+                           class="form-control"
+                           [(ngModel)]="medicine.amount"
+                           maxlength="15">
+                </div>
+
+                <div class="form-group">
+                    <!-- When -->
+                    <label for="time">מתי</label>
+                    <input type="text"
+                           id="time"
+                           ngModel
+                           name="time"
+                           class="form-control"
+                           [(ngModel)]="medicine.time"
+                           maxlength="15">
+                </div>
+
+                <!-- 'Medicine image' -->
+                <label htmlFor='image'>
+                    תמונה של התרופה
+                    <input type='file'
+                           id='file'
+                           name="file"
+                           accept="image/*"
+                           placeholder="Upload an Image"
+                           required
+                           value={this.medicine.image}
+                           (change)="setImage($event)" />
+                </label>
+
+                <img style="background-color: aliceblue;"
+                     [src]="image"
+                     style="width: 100px; height: 100px;">
+
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col-2">
+                        <!-- Submit button -->
+                        <button class="btn btn-primary"
+                                type="submit">אישור</button>
+                    </div>
+
+                    <div class="col-2">
+                        <!-- Clear button -->
+                        <button class="btn btn-secondary"
+                                type="button"
+                                (click)="onClear()">ניקוי</button>
+
+                    </div>
+                    <div class="col-2">
+                        <!-- Cancel button -->
+                        <button class="btn btn-danger"
+                                type="button"
+                                (click)="onCancel()">ביטול</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

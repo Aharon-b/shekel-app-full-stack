@@ -1,0 +1,12 @@
+/* If the array is too long */
+.scroll-list {
+    overflow-y: hidden;
+    overflow-x: scroll;
+}
+
+/* For the line div display */
+.line {
+    background-color: black;
+    color           : rgb(231, 227, 227);
+    text-align      : center;
+}

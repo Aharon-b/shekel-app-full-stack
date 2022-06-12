@@ -1,0 +1,48 @@
+/* For displaying prepuces in admin page*/
+.admin-component-position {
+    margin-top      : 160px;
+    margin-left     : 75px;
+    background-color: beige;
+    width           : 970px;
+    height          : 370px;
+}
+
+.admin-button-top {
+    top: 420px;
+}
+
+.admin-top {
+    top: 300px;
+}
+
+/* For displaying prepuces in all that are implementing 'AbsServiceClass'*/
+.user-button-top {
+    top: 370px;
+}
+
+.user-top {
+    top: 200px;
+}
+
+/* For all users */
+.right-side-rows {
+    left : 640px;
+    top  : 190px;
+    width: 470px;
+}
+
+.button-size {
+    width: 150px;
+}
+
+.button-1 {
+    left: 160px;
+}
+
+.button-2 {
+    left: 430px;
+}
+
+.button-3 {
+    left: 710px;
+}

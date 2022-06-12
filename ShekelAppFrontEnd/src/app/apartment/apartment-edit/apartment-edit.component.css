@@ -1,0 +1,36 @@
+/* All classes are for displaying purposes (Separating admin and coordinator user types)*/
+
+.admin-component-position {
+    margin-top: 160px;
+}
+
+.admin-btn {
+    top: 200px;
+}
+
+div.admin {
+    text-align: center;
+    display   : block;
+}
+
+.bgc {
+    background-color: beige
+}
+
+label {
+    text-align: center;
+    display   : block;
+}
+
+label.coordinator {
+    margin-bottom: 10px;
+}
+
+input.coordinator {
+    margin-bottom: 20px;
+}
+
+.coordinator-btn {
+    top : 500px;
+    left: 400px;
+}

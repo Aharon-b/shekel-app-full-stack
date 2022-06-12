@@ -1,0 +1,139 @@
+<div class="container"
+     [ngClass]="{'admin-component-position': !editMode}">
+
+    <!-- A form for editing tenant details -->
+    <form (ngSubmit)="onSubmit()">
+        <div class="row h-1 "
+             [ngClass]="{'justify-content-center align-items-center': editMode}">
+            <div class="col-6">
+                <!-- Tenant first name field -->
+                <div class="form-group">
+                    <label for="firstName">שם פרטי</label>
+                    <input type="text"
+                           id="firstName"
+                           ngModel
+                           name="firstName"
+                           class="form-control"
+                           [(ngModel)]="tenant.shekelMember.firstName"
+                           maxlength="30">
+                </div>
+
+                <div class="form-group">
+                    <!-- Tenant last name field -->
+                    <label for="lastName">שם משפחה</label>
+                    <input type="text"
+                           id="lastName"
+                           ngModel
+                           name="lastName"
+                           class="form-control"
+                           [(ngModel)]="tenant.shekelMember.lastName"
+                           maxlength="30">
+                </div>
+
+                <div class="form-group">
+                    <!-- Tenant description field -->
+                    <label for="description">תיאור של הדייר</label>
+                    <input type="text"
+                           id="description"
+                           ngModel
+                           name="description"
+                           class="form-control"
+                           [(ngModel)]="tenant.description"
+                           maxlength="30">
+                </div>
+
+                <div class="form-group">
+                    <!-- Tenant phone number field -->
+                    <label for="phoneNumber">טלפון</label>
+                    <input type="tel"
+                           (keypress)="omitSpecialChar($event)"
+                           id="phoneNumber"
+                           ngModel
+                           name="phoneNumber"
+                           class="form-control"
+                           [(ngModel)]="tenant.shekelMember.phoneNumber"
+                           maxlength="11">
+                </div>
+
+                <div class="form-group">
+                    <!-- Tenant birth day field -->
+                    <label for="birthDay">יום הולדת</label>
+                    <input type="date"
+                           id="birthDay"
+                           ngModel
+                           max="2100-12-12"
+                           name="birthDay"
+                           class="form-control"
+                           [(ngModel)]="birthDayString">
+                </div>
+
+                <div [ngClass]="{'right-side-rows position': !editMode}">
+
+                    <div class="form-group">
+                        <!-- Tenant work place field -->
+                        <label for="workPlace">מקום עבודה</label>
+                        <input type="text"
+                               id="workPlace"
+                               ngModel
+                               name="workPlace"
+                               class="form-control"
+                               [(ngModel)]="tenant.workPlace"
+                               maxlength="30">
+                    </div>
+                    <!-- Tenant gender field -->
+                    <div class="form-group"
+                         *ngIf="!editMode">
+                        מין:
+                        <select name="genderStringArray"
+                                class="form-control"
+                                [(ngModel)]="selectedGender">
+                            <option *ngFor="let gender of genderStringArray"
+                                    [ngValue]="gender">{{gender}}</option>
+                        </select>
+                    </div>
+
+                    <label htmlFor='image'>
+                        <!-- Tenant image field -->
+                        <h5 style="color: black;">תמונה</h5>
+                        <br>
+                        <input type='file'
+                               id='file'
+                               name="file"
+                               accept="image/*"
+                               placeholder="Upload an Image"
+                               required
+                               value={this.tenant.shekelMember.image}
+                               (change)="setImage($event)" />
+                    </label>
+
+                    <img style="background-color: aliceblue;"
+                         [src]="image"
+                         style="width: 89px; height: 89px;left: 1000px;">
+
+                    <!-- A button for submitting the from -->
+                    <div class="row">
+                        <div class="col-2">
+                            <button class="btn btn-primary"
+                                    type="submit">אישור</button>
+                        </div>
+
+                        <!-- A button for clearing the from fields -->
+                        <div class="col-2">
+                            <button class="btn btn-secondary"
+                                    type="button"
+                                    (click)="onClear()">ניקוי</button>
+                        </div>
+
+                        <!-- A button for canceling the operation -->
+                        <div class="col-2">
+                            <button class="btn btn-danger"
+                                    type="button"
+                                    (click)="onCancel()">ביטול</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,29 @@
+/* For displaying purposes */
+
+table,
+td,
+th {
+  border: 1px solid black;
+}
+
+table {
+  border-collapse: collapse;
+  width          : 100%;
+}
+
+.small-td {
+  width: 30px;
+}
+
+.scroll {
+  display   : block;
+  overflow-y: scroll;
+  max-height: 300px;
+}
+
+td {
+  height   : 70px;
+  width    : 300px;
+  padding  : 0em;
+  font-size: small;
+}

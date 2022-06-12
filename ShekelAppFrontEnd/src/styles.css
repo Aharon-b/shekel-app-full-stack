@@ -1,0 +1,121 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+
+body {
+  overflow: hidden;
+}
+
+td {
+  padding: 10px 50px;
+}
+
+table tr {
+  border-bottom: 1px solid black;
+}
+
+th {
+  background: white;
+  position  : sticky;
+  top       : 0;
+  text-align: center;
+}
+
+.apartment-display {
+  margin-right    : 30px;
+  background-color: darksalmon;
+  color           : aliceblue;
+  cursor          : pointer;
+  text-align      : center;
+  text-decoration : none;
+
+}
+
+.item-group {
+  width              : 150px;
+  height             : 150px;
+  transition-duration: .3s;
+}
+
+.item-group:hover {
+  width : 162px;
+  height: 164px;
+}
+
+.card-img {
+  width : 100px;
+  height: 100px;
+  margin: 0 auto;
+}
+
+.position {
+  position: absolute;
+}
+
+.position-1 {
+  top: 30px;
+}
+
+.position-2 {
+  top: 70px;
+}
+
+.position-3 {
+  top: 110px;
+}
+
+.position-4 {
+  top: 150px;
+}
+
+.position-5 {
+  top: 190px;
+}
+
+.tenants-table-position {
+  position        : absolute;
+  background-color: aliceblue;
+  height          : fit-content;
+  max-height      : 250px;
+  min-height      : 250px;
+  width           : 400px;
+  top             : 280px;
+}
+
+.tenants-table-overflow {
+  max-height: 250px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.ltr {
+  direction: ltr;
+}
+
+.rtl {
+  direction: rtl;
+}
+
+.disable {
+  pointer-events: none;
+}
+
+.scroll {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.table-position {
+  position        : absolute;
+  top             : 190px;
+  background-color: aliceblue;
+  max-height      : 415px;
+  max-width       : fit-content;
+}
+
+.table-position.all-width-guides {
+  max-width: 1000px;
+  left     : 20px;
+}
+
+tr.admin-tables>td {
+  vertical-align: text-top;
+}

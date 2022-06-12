@@ -1,0 +1,38 @@
+<div style="display: flex;"
+     class="list-display">
+        <!-- For showing each guide details -->
+        <app-guide-details *ngFor="let guide of guides"
+                           [guide]="guide"></app-guide-details>
+
+        <!-- For adding guide from system to apartment guides array -->
+        <button *ngIf="showPlusButton"
+                type="button"
+                class="btn btn-dark position plus-btn-position"
+                (click)="addPresentGuideToApartment()">
+                <h4>+</h4>
+        </button>
+
+        <!-- For all guides in the system array -->
+        <div *ngIf="addNewGuideDisplay"
+             name="add-guide-from-system"
+             class="position select-position">
+                <!-- For canceling operation -->
+                <button class="btn btn-danger"
+                        type="button"
+                        (click)="onCancel()">ביטול</button>
+                <!-- For adding chosen guide -->
+                <button type="button"
+                        class="btn btn-success position"
+                        (click)="addGuideToApartment()">אישור</button>
+                <select name="selectedGuide"
+                        class="form-control"
+                        [(ngModel)]="selectedGuide">
+                        <option *ngFor="let guide of guidesInTheSystem"
+                                [ngValue]="guide">{{guide.shekelMember.firstName}} {{guide.shekelMember.lastName}}
+                        </option>
+                </select>
+        </div>
+</div>
+<!-- For success 'adding guide to apartment' message -->
+<app-screen-msg-display *ngIf="msg !== ''"
+                        [msgDisplay]="msg"></app-screen-msg-display>

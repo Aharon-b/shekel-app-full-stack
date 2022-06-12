@@ -1,0 +1,11 @@
+<!-- This file is navigating to the user type apartment array -->
+
+<div *ngIf="clientType === 'admin'">
+     <app-admin-apartment-display [apartments]="apartmentsList"></app-admin-apartment-display>
+</div>
+
+<div style="display: flex;"
+     *ngIf="clientType !== 'admin'">
+     <app-user-apartment-display *ngFor="let apartment of apartmentsList"
+                                 [apartment]='apartment'></app-user-apartment-display>
+</div>

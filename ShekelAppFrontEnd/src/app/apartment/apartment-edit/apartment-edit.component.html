@@ -1,0 +1,121 @@
+<div class="container position"
+     [ngClass]="{'admin-component-position': !editMode}">
+
+    <!-- Displaying the error message -->
+    <div id="error">{{errorMsg}}</div>
+
+    <!-- A form for editing apartment details -->
+    <form (ngSubmit)="onSubmit()">
+        <div class="row h-1 justify-content-center align-items-center">
+            <div class="col-6 position"
+                 style="top: 30px;"
+                 [ngClass]="{'bgc': !editMode}">
+                <!-- Apartment name field -->
+                <div class="form-group">
+                    <label [ngClass]="{'coordinator': editMode}"
+                           for="name">שם</label>
+                    <input type="text"
+                           id="name"
+                           ngModel
+                           name="name"
+                           class="form-control"
+                           [ngClass]="{'coordinator': editMode}"
+                           [(ngModel)]="apartment.name"
+                           maxlength="15">
+                </div>
+
+                <!-- Apartment address field -->
+                <div class="form-group">
+                    <label [ngClass]="{'coordinator': editMode}"
+                           for="address">כתובת</label>
+                    <input type="text"
+                           id="address"
+                           ngModel
+                           name="address"
+                           class="form-control"
+                           [ngClass]="{'coordinator': editMode}"
+                           [(ngModel)]="apartment.address"
+                           maxlength="15">
+                </div>
+
+                <!-- Apartment telephone field -->
+                <div class="form-group">
+                    <label [ngClass]="{'coordinator': editMode}"
+                           for="phoneNumber">טלפון</label>
+                    <input type="tel"
+                           id="phoneNumber"
+                           ngModel
+                           (keypress)="omitSpecialChar($event)"
+                           name="phoneNumber"
+                           class="form-control"
+                           [ngClass]="{'coordinator': editMode}"
+                           [(ngModel)]="apartment.phoneNumber"
+                           maxlength="10">
+                </div>
+
+                <!-- Apartment gender field -->
+                <div *ngIf="!editMode"
+                     class="form-group admin">
+                    דירת:
+                    <select name="genderStringList"
+                            class="form-control"
+                            [(ngModel)]="selectedGender">
+                        <option *ngFor="let gender of genderStringList"
+                                [ngValue]="gender">{{gender}}</option>
+                    </select>
+                </div>
+
+                <!-- Apartment image field -->
+                <label [ngClass]="{'coordinator': editMode}"
+                       htmlFor='image'>
+                    תמונה
+                </label>
+                <input [ngClass]="{'coordinator': editMode}"
+                       type='file'
+                       id='file'
+                       name="file"
+                       accept="image/*"
+                       placeholder="Upload an Image"
+                       required
+                       value={this.apartment.image}
+                       (change)="setImage($event)" />
+
+                <img [src]="image"
+                     style="width: 100px; height: 100px;">
+
+            </div>
+        </div>
+
+        <div class="row position"
+             [ngClass]="editMode ? 'coordinator-btn' : 'admin-btn'">
+            <div class="col-2">
+
+                <!-- A button for submitting the from (is disabled if one of the conditions is false) -->
+                <button class="btn btn-primary"
+                        type="submit"
+                        [disabled]="
+                        this.apartment.name == undefined || this.apartment.name.length === 0 ||
+                        this.apartment.address == undefined || this.apartment.address.length === 0 ||
+                        this.apartment.phoneNumber == undefined || this.apartment.phoneNumber.length < 10 
+                        ">אישור</button>
+            </div>
+
+            <div class="col-2 position"
+                 style="left: 70px;">
+                <!-- A button for clearing the from fields -->
+                <button class="btn btn-secondary"
+                        type="button"
+                        (click)="onClear()">ניקוי</button>
+
+            </div>
+            <div class="col-2 position"
+                 style="left: 130px;">
+                 
+                <!-- A button for canceling the operation -->
+                <button class="btn btn-danger"
+                        type="button"
+                        (click)="onCancel()">ביטול</button>
+            </div>
+        </div>
+    </form>
+</div>

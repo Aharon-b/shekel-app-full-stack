@@ -1,0 +1,42 @@
+<!-- Login to system form -->
+<div class="all-page-display position">
+       <form class="form-signin position"
+             method="post"
+             (submit)="login()"
+             [formGroup]="formGroup">
+              <!-- 'shekel app' -->
+              <h2 class="form-signin-heading">אפליקציית שקל</h2>
+              <p>
+                     <!-- Email(username) -->
+                     <label for="username"
+                            class="sr-only">אימייל</label>
+                     <input type="text"
+                            id="username"
+                            name="username"
+                            class="form-control"
+                            placeholder="Username"
+                            formControlName="username"
+                            required
+                            autofocus>
+              </p>
+              <p>
+                     <!-- Password -->
+                     <label for="password"
+                            class="sr-only">סיסמה</label>
+                     <input type="password"
+                            id="password"
+                            name="password"
+                            class="form-control"
+                            placeholder="Password"
+                            formControlName="password"
+                            required>
+              </p>
+              <!-- 'Login to the system' -->
+              <button class="btn btn-lg btn-primary btn-block"
+                      type="submit">כניסה למערכת</button>
+       </form>
+</div>
+
+<!-- For displaying 'incorrect user name or password ' error message -->
+<app-screen-msg-display *ngIf="errorMsg !== ''"
+                        [msgDisplay]="errorMsg"></app-screen-msg-display>

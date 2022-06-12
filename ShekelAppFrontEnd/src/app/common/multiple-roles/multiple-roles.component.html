@@ -1,0 +1,21 @@
+<!-- Component header -->
+<h3 class="position header-position">: כניסה בתור</h3>
+<!-- Role Admin -->
+<a *ngIf="showAdminOption"
+   class="position all-options all-hover admin-and-guide-position admin-and-widthGuide-position admin"
+   (click)="logToAdminPage()">מנהל\ת</a>
+
+   <!-- Role Coordinator -->
+<a *ngIf="showCoordinatorOption"
+   class="position all-options all-hover coordinator-and-widthGuide-position coordinator-and-guide-position coordinator"
+   (click)="logToCoordinatorPage()">רכז\ת</a>
+
+   <!-- Role Width-Guide -->
+<a *ngIf="showWidthGuideOption"
+   class="position all-options all-hover coordinator-and-widthGuide-position admin-and-widthGuide-position width-guide"
+   (click)="logToWidthGuidePage()">רכז\ת תפעולי\ת</a>
+
+   <!-- Role Guide -->
+<a *ngIf="showGuideOption"
+   class="position all-options all-hover admin-and-guide-position coordinator-and-guide-position guide"
+   (click)="logToGuidePage()">מדריכ\ה</a>

@@ -1,0 +1,23 @@
+<!-- Displaying guide details -->
+<div class="card guide-card"
+     style="width: 16rem;">
+     <div class="card-body">
+          <h5 class="card-title">{{guide.shekelMember.firstName}}</h5>
+          <p class="card-text">{{guide.shekelMember.lastName}}</p>
+          <p>{{guide.shekelMember.phoneNumber}}</p>
+          <!-- For deleting guide from apartment guides array -->
+          <button *ngIf="userType === 'coordinator'"
+                  class="position"
+                  style="top: 10px; left: 200px;">
+               <img style="height: 20px;"
+                    src="assets/pic/14796741191530273515-128.png"
+                    alt="מחיקת מדריך מרשימת המדריכים של הדירה"
+                    (click)="removeGuideFromApartment()"></button>
+          <img [src]="imageUrl"
+               class="position guide-image"
+               alt="תמונה של מדריכ.ה">
+     </div>
+</div>
+<!-- For displaying 'guide is deleted from apartment guides array' message -->
+<app-screen-msg-display [msgDisplay]="msgDisplay"
+                        *ngIf="msgDisplay !== ''"></app-screen-msg-display>
